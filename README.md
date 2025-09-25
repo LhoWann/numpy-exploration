@@ -1,4 +1,4 @@
-# **ELEMENTWISE FUNCTION**
+# **NUMPY EXPLORATION**
 
 NumPy menyediakan banyak **fungsi vektorisasi** yang bekerja secara *elementwise*, artinya operasi dilakukan untuk setiap elemen array secara individu. Fungsi-fungsi ini sangat berguna karena:
 
