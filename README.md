@@ -1,5 +1,6 @@
 # **NUMPY EXPLORATION**
 
+## ELEMENTWISE FUNCTION
 NumPy menyediakan banyak **fungsi vektorisasi** yang bekerja secara *elementwise*, artinya operasi dilakukan untuk setiap elemen array secara individu. Fungsi-fungsi ini sangat berguna karena:
 
 * Input: satu atau lebih array (dengan dimensi yang cocok atau bisa  *broadcasted* ).
