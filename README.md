@@ -155,5 +155,5 @@ Berikut adalah ringkasan fungsi-fungsi agregasi yang tersedia di NumPy, berdasar
 | `np.cumprod`              | **Produk kumulatif dari semua elemen.**                    |
 | `np.min`,`np.max`       | **Nilai minimum/maksimum dalam sebuah array.**             |
 | `np.argmin`,`np.argmax` | **Indeks dari nilai minimum/maksimum dalam sebuah array.** |
-| `np.all`                  | **Mengembalikan**                                              |
-| `np.any`                  | **Mengembalikan**                                              |
+| `np.all`                  | **Mengembalikan True jika semua elemen dalam array argumen tidak nol.**                                              |
+| `np.any`                  | **Mengembalikan True jika ada elemen dalam array argumen yang tidak nol.**                                              |
