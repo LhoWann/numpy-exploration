@@ -146,14 +146,14 @@ Berikut adalah ringkasan fungsi-fungsi agregasi yang tersedia di NumPy, berdasar
 
 | Fungsi NumPy                | Deskripsi                                                            |
 | --------------------------- | -------------------------------------------------------------------- |
-| `np.mean`                 | **Rata-rata dari semua nilai dalam array.**^4^                 |
-| `np.std`                  | **Standar deviasi.**^5^                                        |
-| `np.var`                  | **Varians.**^6^                                                |
-| `np.sum`                  | **Jumlah dari semua elemen.**^7^                               |
-| `np.prod`                 | **Produk dari semua elemen.**^8^                               |
-| `np.cumsum`               | **Jumlah kumulatif dari semua elemen.**^9^                     |
-| `np.cumprod`              | **Produk kumulatif dari semua elemen.**^10^                    |
-| `np.min`,`np.max`       | **Nilai minimum/maksimum dalam sebuah array.**^11^             |
-| `np.argmin`,`np.argmax` | **Indeks dari nilai minimum/maksimum dalam sebuah array.**^12^ |
+| `np.mean`                 | **Rata-rata dari semua nilai dalam array.**                 |
+| `np.std`                  | **Standar deviasi.**                                        |
+| `np.var`                  | **Varians.**                                                |
+| `np.sum`                  | **Jumlah dari semua elemen.**                               |
+| `np.prod`                 | **Produk dari semua elemen.**                               |
+| `np.cumsum`               | **Jumlah kumulatif dari semua elemen.**                    |
+| `np.cumprod`              | **Produk kumulatif dari semua elemen.**                    |
+| `np.min`,`np.max`       | **Nilai minimum/maksimum dalam sebuah array.**             |
+| `np.argmin`,`np.argmax` | **Indeks dari nilai minimum/maksimum dalam sebuah array.** |
 | `np.all`                  | **Mengembalikan**                                              |
 | `np.any`                  | **Mengembalikan**                                              |
