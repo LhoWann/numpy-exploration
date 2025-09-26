@@ -1,159 +1,178 @@
 # **NUMPY EXPLORATION**
 
-## ELEMENTWISE FUNCTION
-NumPy menyediakan banyak **fungsi vektorisasi** yang bekerja secara *elementwise*, artinya operasi dilakukan untuk setiap elemen array secara individu. Fungsi-fungsi ini sangat berguna karena:
+## Pendahuluan
 
-* Input: satu atau lebih array (dengan dimensi yang cocok atau bisa  *broadcasted* ).
-* Output: array baru dengan bentuk ( *shape* ) yang sama.
-* Eksekusi jauh lebih cepat daripada menggunakan loop Python biasa.
+Repositori ini dibuat sebagai bagian dari eksplorasi mandiri materi **Bab 2: Vectors, Matrices, and Multidimensional Arrays** dari buku *Numerical Python* (Robert Johansson).
+Tujuan utama eksplorasi ini adalah memahami bagaimana data direpresentasikan dan dimanipulasi menggunakan **NumPy**, library fundamental Python untuk komputasi numerik.
 
-> Fungsi element-wise adalah operasi atau fungsi yang diterapkan pada setiap elemen dari sebuah array NumPy secara individual. Hasilnya adalah sebuah array baru dengan bentuk yang sama, di mana setiap elemennya adalah hasil dari penerapan fungsi tersebut pada elemen yang bersesuaian di array input.
+Dengan mempelajari berbagai sintaks dan fungsi dasar NumPy, diharapkan:
 
-Fungsi element-wise merupakan inti dari ekspresi tervektorisasi di NumPy. Alih-alih menulis perulangan `for` manual dalam python untuk memproses setiap nilai satu per satu (yang cenderung lambat), Anda dapat menerapkan satu fungsi ke seluruh array sekaligus. Hal ini menghasilkan kode yang lebih ringkas, mudah dibaca, dan memiliki performa yang jauh lebih tinggi karena operasinya dijalankan oleh kode C atau Fortran yang terkompilasi di latar belakang.
+* Mampu memahami karakteristik dan tipe data dalam array.
+* Menguasai pembuatan array, matriks, dan operasi dasar.
+* Terbiasa dengan manipulasi array multidimensi.
+* Mampu melakukan operasi aritmatika, logika, serta fungsi **elementwise** dengan efisien.
 
-## Contoh Dasar
+Repositori ini ditulis dalam format **Markdown** dengan tambahan contoh kode Python agar lebih mudah dipahami dan dipraktikkan.
 
-```
+---
+
+## 📑 Daftar Isi
+
+1. [Mengenali Karakteristik Data](#1-mengenali-karakteristik-data)
+2. [Tipe Data](#2-tipe-data)
+3. [Membuat Array dengan Berbagai Teknik](#3-membuat-array-dengan-berbagai-teknik)
+4. [Membuat Matriks](#4-membuat-matriks)
+5. [Manipulasi Matriks dan Operasi Matriks](#5-manipulasi-matriks-dan-operasi-matriks)
+6. [Membuat Array Multidimensi](#6-membuat-array-multidimensi)
+7. [Mengetahui Index Elemen pada Array](#7-mengetahui-index-elemen-pada-array)
+8. [Operasi Logika dengan Boolean](#8-operasi-logika-dengan-boolean)
+9. [Operasi Aritmatika](#9-operasi-aritmatika)
+10. [Elementwise Functions](#10-elementwise-functions)
+11. [Agregasi Beberapa Array](#11-agregasi-beberapa-array)
+12. [Operasi dengan Logika Himpunan](#12-operasi-dengan-logika-himpunan)
+13. [Manipulasi Array](#13-manipulasi-array)
+
+---
+
+## 1. Mengenali Karakteristik Data
+
+```python
 import numpy as np
 
-x = np.linspace(-1, 1, 11)
-print(x)
-# [-1.  -0.8 -0.6 -0.4 -0.2  0.   0.2  0.4  0.6  0.8  1. ]
-
-y = np.sin(np.pi * x)
-print(np.round(y, 4))
-# [-0.     -0.5878 -0.9511 -0.9511 -0.5878  0.      0.5878  0.9511  0.9511  0.5878  0.    ]
-
+arr = np.array([1, 2, 3, 4, 5])
+print(type(arr))     # <class 'numpy.ndarray'>
+print(arr.shape)     # (5,)
+print(arr.ndim)      # 1
 ```
 
-## Elementwise Arithmetic Operators
+---
 
-| Operator     | Deskripsi       |
-| ------------ | --------------- |
-| `+ , +=`   | Penjumlahan     |
-| `- , -=`   | Pengurangan     |
-| `* , *=`   | Perkalian       |
-| `/ , /=`   | Pembagian       |
-| `//,//=`   | Pembagian bulat |
-| `** , **=` | Pangkat         |
+## 2. Tipe Data
 
-## Elementary Mathematical Functions
-
-| Fungsi NumPy                           | Deskripsi                    |
-| -------------------------------------- | ---------------------------- |
-| `np.sin, np.cos, np.tan`             | Fungsi trigonometri          |
-| `np.arcsin, np.arccos, np.arctan`    | Fungsi trigonometri invers   |
-| `np.sinh, np.cosh, np.tanh`          | Fungsi hiperbolik            |
-| `np.arcsinh, np.arccosh, np.arctanh` | Fungsi hiperbolik invers     |
-| `np.sqrt`                            | Akar kuadrat                 |
-| `np.exp`                             | Eksponensial                 |
-| `np.log, np.log2, np.log10`          | Logaritma basis e, 2, dan 10 |
-
-## Mathematical Operations
-
-Fungsi Numpy
-
-| Fungsi NumPy                                    | Deskripsi                                    |
-| ----------------------------------------------- | -------------------------------------------- |
-| `np.add, np.subtract, np.multiply, np.divide` | Aritmatika dasar dua array                   |
-| `np.power`                                    | Pangkat elementwise                          |
-| `np.remainder`                                | Sisa pembagian                               |
-| `np.reciprocal`                               | Kebalikan (1/x)                              |
-| `np.real, np.imag, np.conj`                   | Bagian real, imajiner, dan konjugat kompleks |
-| `np.sign, np.abs`                             | Tanda dan nilai absolut                      |
-| `np.floor, np.ceil, np.rint, np.round`        | Pembulatan                                   |
-
-
-## AGREGASI BEBERAPA ARRAY
-
-Agregasi array adalah proses menghitung nilai ringkasan (seperti rata-rata atau jumlah total) dari elemen-elemen di dalam sebuah array. **NumPy menyediakan serangkaian fungsi agregat yang mengambil array sebagai input dan, secara default, mengembalikan sebuah nilai skalar tunggal sebagai output**.
-
-## **Penjelasan Rinci**
-
-Agregasi adalah salah satu operasi paling umum dalam analisis data. NumPy mengimplementasikan fungsi-fungsi ini dengan sangat efisien. Alih-alih Anda menulis perulangan manual untuk menghitung jumlah atau rata-rata, Anda bisa memanggil satu fungsi tunggal.
-
-* **Sintaks Ganda (Fungsi vs. Metode)** : Sebagian besar fungsi agregasi dapat dipanggil dengan dua cara: sebagai fungsi dari modul NumPy (misalnya, `np.sum(data)`) atau sebagai metode dari objek array itu sendiri (misalnya, `data.sum()`). **Keduanya ekuivalen**^2^.
-* **Agregasi Sepanjang Sumbu Tertentu (Argumen `axis`)** : Secara default, agregasi dilakukan pada keseluruhan elemen array. **Namun, Anda dapat mengontrol sumbu (dimensi) mana yang akan diagregasi menggunakan argumen kata kunci **
-  `<span class="citation-116">axis</span>`^3^. Ini sangat berguna untuk array multi-dimensi.
-* Untuk array 2D (matriks), `axis=0` berarti agregasi dilakukan **sepanjang kolom** (menghasilkan satu nilai untuk setiap kolom).
-* Untuk array 2D, `axis=1` berarti agregasi dilakukan **sepanjang baris** (menghasilkan satu nilai untuk setiap baris).
-
-## **Contoh Penggunaan**
-
-Mari kita gunakan contoh dari dokumen untuk memperjelas. Pertama, kita buat sebuah array 3x3:
-
-**Python**
-
-```
-import numpy as np
-
-data = np.arange(1,10).reshape(3,3)
-print(data)
+```python
+arr = np.array([1, 2, 3], dtype=np.float32)
+print(arr.dtype)   # float32
 ```
 
+---
+
+## 3. Membuat Array dengan Berbagai Teknik
+
+```python
+np.zeros((3,3))
+np.ones((2,4))
+np.arange(0,10,2)
+np.linspace(0,1,5)
 ```
-[[1 2 3]
- [4 5 6]
- [7 8 9]]
+
+---
+
+## 4. Membuat Matriks
+
+```python
+mat = np.matrix([[1,2],[3,4]])
+print(mat)
 ```
 
-1. Agregasi Keseluruhan Array (Default)
-   Fungsi ini akan menjumlahkan semua elemen dalam array menjadi satu nilai.
-   **Python**
+---
 
-   ```
-   # Menjumlahkan semua elemen
-   print(data.sum())
-   ```
+## 5. Manipulasi Matriks dan Operasi Matriks
 
-   ```
-   45
-   ```
-2. Agregasi Sepanjang Sumbu Kolom (axis=0)
-   Fungsi ini akan menjumlahkan elemen-elemen ke bawah (sepanjang kolom), menghasilkan sebuah array baru yang berisi jumlah dari setiap kolom.
-   **Python**
+```python
+A = np.array([[1,2],[3,4]])
+B = np.array([[5,6],[7,8]])
 
-   ```
-   # Menjumlahkan sepanjang kolom
-   # Kolom 1: 1+4+7=12
-   # Kolom 2: 2+5+8=15
-   # Kolom 3: 3+6+9=18
-   print(data.sum(axis=0))
-   ```
+print(A + B)   # Penjumlahan
+print(A @ B)   # Perkalian matriks
+```
 
-   ```
-   [12 15 18]
-   ```
-3. Agregasi Sepanjang Sumbu Baris (axis=1)
-   Fungsi ini akan menjumlahkan elemen-elemen ke samping (sepanjang baris), menghasilkan sebuah array baru yang berisi jumlah dari setiap baris.
-   **Python**
+---
 
-   ```
-   # Menjumlahkan sepanjang baris
-   # Baris 1: 1+2+3=6
-   # Baris 2: 4+5+6=15
-   # Baris 3: 7+8+9=24
-   print(data.sum(axis=1))
-   ```
+## 6. Membuat Array Multidimensi
 
-   ```
-   [ 6 15 24]
-   ```
+```python
+arr3d = np.array([[[1,2],[3,4]], [[5,6],[7,8]]])
+print(arr3d.shape)   # (2,2,2)
+```
 
-## **Tabel Fungsi Agregasi Umum**
+---
 
-Berikut adalah ringkasan fungsi-fungsi agregasi yang tersedia di NumPy, berdasarkan Tabel 2-9 dari dokumen:
+## 7. Mengetahui Index Elemen pada Array
 
-| Fungsi NumPy                | Deskripsi                                                            |
-| --------------------------- | -------------------------------------------------------------------- |
-| `np.mean`                 | **Rata-rata dari semua nilai dalam array.**                 |
-| `np.std`                  | **Standar deviasi.**                                        |
-| `np.var`                  | **Varians.**                                                |
-| `np.sum`                  | **Jumlah dari semua elemen.**                               |
-| `np.prod`                 | **Produk dari semua elemen.**                               |
-| `np.cumsum`               | **Jumlah kumulatif dari semua elemen.**                    |
-| `np.cumprod`              | **Produk kumulatif dari semua elemen.**                    |
-| `np.min`,`np.max`       | **Nilai minimum/maksimum dalam sebuah array.**             |
-| `np.argmin`,`np.argmax` | **Indeks dari nilai minimum/maksimum dalam sebuah array.** |
-| `np.all`                  | **Mengembalikan True jika semua elemen dalam array argumen tidak nol.**                                              |
-| `np.any`                  | **Mengembalikan True jika ada elemen dalam array argumen yang tidak nol.**                                              |
+```python
+arr = np.array([10, 20, 30, 40])
+print(arr[0])   # 10
+print(arr[-1])  # 40
+```
+
+---
+
+## 8. Operasi Logika dengan Boolean
+
+```python
+arr = np.array([1,2,3,4,5])
+print(arr > 3)        # [False False False  True  True]
+print(arr[arr > 3])   # [4 5]
+```
+
+---
+
+## 9. Operasi Aritmatika
+
+```python
+a = np.array([1,2,3])
+b = np.array([4,5,6])
+print(a + b)   # [5 7 9]
+print(a * b)   # [ 4 10 18]
+```
+
+---
+
+## 10. Elementwise Functions
+
+```python
+x = np.linspace(-np.pi, np.pi, 5)
+print(np.sin(x))
+print(np.exp(x))
+print(np.sqrt(np.abs(x)))
+```
+
+---
+
+## 11. Agregasi Beberapa Array
+
+```python
+arr = np.array([1,2,3,4,5])
+print(arr.sum())      # 15
+print(arr.mean())     # 3.0
+print(arr.max())      # 5
+```
+
+---
+
+## 12. Operasi dengan Logika Himpunan
+
+```python
+a = np.array([1,2,3,4])
+b = np.array([3,4,5,6])
+
+print(np.union1d(a,b))        # gabungan
+print(np.intersect1d(a,b))    # irisan
+print(np.setdiff1d(a,b))      # selisih
+```
+
+---
+
+## 13. Manipulasi Array
+
+```python
+arr = np.arange(6).reshape((2,3))
+print(arr)
+
+print(arr.T)    # transpose
+print(arr.flatten())  # menjadi 1 dimensi
+```
+
+---
+
+UNTUK PENJELASAN LEBIH LANNJUT SILAKAN BUKA FILE MD YANG TERLAMPIRKAN PADA REPOSITORI INI !!!
